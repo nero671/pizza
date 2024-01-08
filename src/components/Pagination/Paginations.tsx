@@ -8,7 +8,7 @@ export const Pagination = (props: any) => {
                 [...Array(3)].map((item, i) => {
                     return (
                         <li
-                            onClick={() => props.setPage(i + 1)}
+                            onClick={() => props.onChangePage(i + 1)}
                             className={props.page === i + 1 ? 'pagination-item active' : 'pagination-item'}
                             key={i}
                         >{i + 1}</li>
