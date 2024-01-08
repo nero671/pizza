@@ -12,7 +12,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {setCategoryId, setPageCount} from "../redux/slices/filterSlice";
 import axios from "axios";
 import qs from 'qs';
-
+import { JSX } from 'react/jsx-runtime';
+import {setItems, fetchPizzas} from "../redux/slices/pizzaSlice";
 
 
 export const Home = (props: any) => {
@@ -22,11 +23,12 @@ export const Home = (props: any) => {
     const sort = useSelector(state => state.filter.sort);
     // @ts-ignore
     const pageCount = useSelector(state => state.filter.pageCount)
+    // @ts-ignore
+    const { items, status } = useSelector(state => state.pizza);
     const dispatch = useDispatch();
 
 
-    const [pizzas, setPizzas] = useState<Array<PizzasType>>([]);
-    const [isLoading, setIsLoading] = useState(true);
+    // const [pizzas, setPizzas] = useState<Array<PizzasType>>([]);
 
     const onClickCategory = (index: any) => {
         dispatch(setCategoryId(index))
@@ -36,18 +38,39 @@ export const Home = (props: any) => {
         dispatch(setPageCount(num))
     }
 
+    const getPizzas = async () => {
+        // @ts-ignore
+        dispatch(fetchPizzas({
+            category,
+            sort
+        }));
+
+        window.scrollTo(0, 0);
+    }
+
+    // useEffect(() => {
+    //     setIsLoading(true);
+    //     axios.get(`https://6538d707a543859d1bb20638.mockapi.io/pizza?${category > 0 ? `category=${category}` : ''
+    //     }&sortBy=${sort.sort.replace('-', '')}&order=${sort.sort.includes('-') ? 'asc' : 'desc'}`)
+    //         .then((response) => {
+    //             if (response.data) {
+    //                 dispatch(setItems(response.data));
+    //                 setIsLoading(false);
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             console.error(error);
+    //             setIsLoading(false);
+    //         })
+    //
+    //     window.scrollTo(0, 0)
+    // }, [category, sort]);
+
     useEffect(() => {
-        setIsLoading(true);
-        axios.get(`https://6538d707a543859d1bb20638.mockapi.io/pizza?${category > 0 ? `category=${category}` : ''
-                    }&sortBy=${sort.sort.replace('-', '')}&order=${sort.sort.includes('-') ? 'asc' : 'desc'}`)
-            .then((response) => {
-                if(response.data) {
-                    setPizzas(response.data);
-                    setIsLoading(false);
-                }
-            })
-            window.scrollTo(0, 0)
+        getPizzas();
     }, [category, sort]);
+
+
 
 
 
@@ -58,16 +81,16 @@ export const Home = (props: any) => {
                     category={category}
                     onClickCategory={onClickCategory}
                 />
-                <Sort />
+                <Sort/>
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
                 {
-                    isLoading ? [... new Array(6)].map((_, index) => <Skeleton key={index} />)
+                    status === 'loading' ? [...new Array(6)].map((_, index) => <Skeleton key={index}/>)
                         :
-                        pizzas
-                            .filter(item => item.title.toLowerCase().includes(props.searchValue.toLowerCase()))
-                            .map(pizza => {
+                        items
+                            .filter((item: { title: string; }) => item.title.toLowerCase().includes(props.searchValue.toLowerCase()))
+                            .map((pizza: JSX.IntrinsicAttributes & PizzasType) => {
                             return (
                                 <PizzaBlock
                                     key={pizza.id}
