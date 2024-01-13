@@ -14,6 +14,7 @@ import axios from "axios";
 import qs from 'qs';
 import { JSX } from 'react/jsx-runtime';
 import {setItems, fetchPizzas} from "../redux/slices/pizzaSlice";
+import {Link} from "react-router-dom";
 
 
 export const Home = (props: any) => {
@@ -22,7 +23,10 @@ export const Home = (props: any) => {
     // @ts-ignore
     const sort = useSelector(state => state.filter.sort);
     // @ts-ignore
-    const pageCount = useSelector(state => state.filter.pageCount)
+    const pageCount = useSelector(state => state.filter.pageCount);
+    // @ts-ignore
+    const searchValue = useSelector(state => state.filter.searchValue)
+
     // @ts-ignore
     const { items, status } = useSelector(state => state.pizza);
     const dispatch = useDispatch();
@@ -89,7 +93,7 @@ export const Home = (props: any) => {
                     status === 'loading' ? [...new Array(6)].map((_, index) => <Skeleton key={index}/>)
                         :
                         items
-                            .filter((item: { title: string; }) => item.title.toLowerCase().includes(props.searchValue.toLowerCase()))
+                            .filter((item: { title: string; }) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
                             .map((pizza: JSX.IntrinsicAttributes & PizzasType) => {
                             return (
                                 <PizzaBlock

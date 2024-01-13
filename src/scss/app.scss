@@ -362,3 +362,25 @@ body {
     }
   }
 }
+
+.pizza-detail__wrapper {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  .pizza-detail__info {
+    display: flex;
+    flex-direction: column;
+
+    .content__title {
+      margin: 20px 0;
+      margin-top: 0;
+    }
+
+    .pizza-block__selector {
+      width: 290px;
+    }
+  }
+}

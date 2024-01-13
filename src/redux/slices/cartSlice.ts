@@ -2,11 +2,15 @@ import { createSlice } from '@reduxjs/toolkit'
 
 export interface CounterState {
     totalPrice: number,
+    currentType: number,
+    currentSize: number,
     items: Array<any>,
 }
 
 const initialState: CounterState = {
     totalPrice: 0,
+    currentType: 0,
+    currentSize: 0,
     items: []
 }
 
@@ -30,6 +34,14 @@ export const cartSlice = createSlice({
             }, 0)
         },
 
+        addType(state, action) {
+            state.currentType = action.payload;
+        },
+
+        addSize(state, action) {
+            state.currentSize = action.payload;
+        },
+
         minusItem(state, action) {
             const findItem = state.items.find(obj => obj.id === action.payload);
 
@@ -49,7 +61,11 @@ export const cartSlice = createSlice({
     },
 })
 
+export const selectCart = (state: { cart: any; }) => state.cart;
+export const selectCartItemById = (id: number) => (state: { cart: { items: any[]; }; }) => state.cart.items.find(obj => obj.id === id);
+
+
 // Action creators are generated for each case reducer function
-export const { addItem, removeItem, clearItem, minusItem } = cartSlice.actions
+export const { addItem, removeItem, clearItem, minusItem, addType, addSize } = cartSlice.actions
 
 export default cartSlice.reducer
