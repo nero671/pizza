@@ -1,11 +1,15 @@
-import React, {useState} from "react";
+import React from "react";
 
-export const Pagination = (props: any) => {
+type PaginationType = {
+    onChangePage: (i: number) => void,
+    page: number,
+}
+export const Pagination: React.FC<PaginationType> = (props) => {
 
     return (
         <ul className='pagination'>
             {
-                [...Array(3)].map((item, i) => {
+                [...Array(3)].map((item, i: number) => {
                     return (
                         <li
                             onClick={() => props.onChangePage(i + 1)}

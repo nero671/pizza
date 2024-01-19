@@ -1,16 +1,25 @@
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {addSize, addType} from "../../redux/slices/cartSlice";
+import React, {useState} from "react";
+import {useDispatch} from "react-redux";
+import {addSize} from "../../redux/slices/cartSlice";
 
-export const PizzaSize = (props: any) => {
+type PizzaSizeProps = {
+    pizza: {
+        sizes: number[];
+    };
+}
+
+
+export const PizzaSize: React.FC<PizzaSizeProps> = (props) => {
+
+    console.log(props)
+
+    const [activeSize, setActiveSize] = useState<number>(0);
 
     const dispatch = useDispatch();
 
-    // @ts-ignore
-    const { currentSize } = useSelector(state => state.cart);
-
-    const setActiveSize = (index: number) => {
+    const setActiveSizes = (index: number) => {
         dispatch(addSize(index));
+        setActiveSize(index);
     }
 
     return (
@@ -20,8 +29,8 @@ export const PizzaSize = (props: any) => {
                     return (
                         <li
                             key={i}
-                            onClick={() => setActiveSize(i)}
-                            className={currentSize === i ? 'active' : ''}
+                            onClick={() => setActiveSizes(i)}
+                            className={activeSize === i ? 'active' : ''}
                         >
                             {size} см.
                         </li>

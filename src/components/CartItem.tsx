@@ -1,8 +1,19 @@
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {addItem, minusItem, removeItem} from "../redux/slices/cartSlice";
+import React from "react";
 
-export const CartItem = (props: any) => {
+export type CartItemProps = {
+    id: string,
+    title: string,
+    price: number,
+    imageUrl: string,
+    size: string,
+    type: number,
+    count: number,
+}
+
+export const CartItem: React.FC<CartItemProps> = (props) => {
     const dispatch = useDispatch();
     // @ts-ignore
     const cartItems = useSelector(state => state.cart.items);

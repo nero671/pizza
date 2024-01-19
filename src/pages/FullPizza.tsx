@@ -1,16 +1,15 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import axios from "axios";
-import {useDispatch, useSelector} from "react-redux";
-import {addItem, selectCartItemById} from "../redux/slices/cartSlice";
 import {PizzaType} from "../components/PizzaInfo/PizzaType";
 import {PizzaSize} from "../components/PizzaInfo/PizzaSize";
 import {AddToCart} from "../components/PizzaInfo/AddToCart";
+import {PizzasType} from "../App";
 
 
-export const FullPizza = (props: any) => {
+export const FullPizza: React.FC  = () => {
     const { id } = useParams();
-    const [pizza, setPizza] = useState<any>();
+    const [pizza, setPizza] = useState<PizzasType>();
 
     useEffect(() => {
         async function fetchPizza() {

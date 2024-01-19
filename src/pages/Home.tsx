@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 
 import '../scss/app.scss';
 import '../App.css';
@@ -10,14 +10,11 @@ import {PizzasType} from "../App";
 import {Pagination} from "../components/Pagination/Paginations";
 import {useDispatch, useSelector} from "react-redux";
 import {setCategoryId, setPageCount} from "../redux/slices/filterSlice";
-import axios from "axios";
-import qs from 'qs';
 import { JSX } from 'react/jsx-runtime';
-import {setItems, fetchPizzas} from "../redux/slices/pizzaSlice";
-import {Link} from "react-router-dom";
+import {fetchPizzas} from "../redux/slices/pizzaSlice";
 
 
-export const Home = (props: any) => {
+export const Home = () => {
     // @ts-ignore
     const category = useSelector(state => state.filter.categoryId);
     // @ts-ignore
@@ -34,7 +31,7 @@ export const Home = (props: any) => {
 
     // const [pizzas, setPizzas] = useState<Array<PizzasType>>([]);
 
-    const onClickCategory = (index: any) => {
+    const onClickCategory = (index: number) => {
         dispatch(setCategoryId(index))
     }
 
@@ -73,9 +70,6 @@ export const Home = (props: any) => {
     useEffect(() => {
         getPizzas();
     }, [category, sort]);
-
-
-
 
 
     return (

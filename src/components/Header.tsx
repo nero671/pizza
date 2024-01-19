@@ -5,7 +5,7 @@ import {Search} from "./Search/Search";
 import {useSelector} from "react-redux";
 import {selectCart} from "../redux/slices/cartSlice";
 
-export const Header = (props: any) => {
+export const Header: React.FC = () => {
     // @ts-ignore
     const { items, totalPrice } = useSelector(selectCart);
 

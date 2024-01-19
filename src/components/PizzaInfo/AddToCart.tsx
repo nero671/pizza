@@ -1,8 +1,18 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {addItem, selectCartItemById} from "../../redux/slices/cartSlice";
 
-export const AddToCart = (props: any) => {
+type AddToCartProps = {
+    pizza: {
+        id: string,
+        title: string,
+        price: number,
+        imageUrl: string,
+        sizes: number[],
+    }
+}
+
+export const AddToCart: React.FC<AddToCartProps> = (props) => {
 
     const dispatch = useDispatch();
 

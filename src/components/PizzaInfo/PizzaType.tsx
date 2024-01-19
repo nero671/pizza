@@ -1,18 +1,22 @@
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React, { useState} from "react";
+import {useDispatch} from "react-redux";
 import {addType} from "../../redux/slices/cartSlice";
 
+type PizzaTypeProps = {
+    pizza: {
+        types: number[];
+    };
+}
+export const PizzaType:React.FC<PizzaTypeProps> = (props) => {
+    const [activeType, setActiveType] = useState<number>(0);
 
-export const PizzaType = (props: any) => {
     const typesName = ['тонкое', 'традиционное'];
 
     const dispatch = useDispatch();
 
-    // @ts-ignore
-    const { currentType } = useSelector(state => state.cart);
-
-    const setActiveType = (index: number) => {
+    const setActiveTypes = (index: number) => {
         dispatch(addType(index));
+        setActiveType(index);
     }
 
     return (
@@ -22,8 +26,8 @@ export const PizzaType = (props: any) => {
                     return (
                         <li
                             key={i}
-                            onClick={() => setActiveType(i)}
-                            className={currentType === i ? 'active' : ''}
+                            onClick={() => setActiveTypes(i)}
+                            className={activeType === i ? 'active' : ''}
                         >
                             {typesName[type]}
                         </li>
