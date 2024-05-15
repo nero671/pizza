@@ -1,8 +1,9 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import axios from "axios";
+import {PizzaType} from "../../components/PizzaBlock/PizzaBlock";
 
 export interface CounterState {
-    items: Array<any>,
+    items: PizzaType[],
     status: 'loading' | 'success' | 'error'
 }
 
@@ -25,8 +26,6 @@ const initialState: CounterState = {
     items: [],
     status: 'loading',
 }
-
-// @ts-ignore
 
 export const pizzaSlice = createSlice({
     name: 'pizza',

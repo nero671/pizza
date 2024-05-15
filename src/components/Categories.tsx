@@ -1,12 +1,12 @@
 import React from "react";
+import { useWhyDidYouUpdate } from 'ahooks';
 
 type CategoriesProps = {
     category: number,
     onClickCategory: (i: number) => void,
 }
 
-export const Categories: React.FC<CategoriesProps> = (props) => {
-
+export const Categories: React.FC<CategoriesProps> = React.memo( (props) => {
     const categories: string[] = [
         'Все',
         'Мясные',
@@ -33,4 +33,4 @@ export const Categories: React.FC<CategoriesProps> = (props) => {
             </ul>
         </div>
     )
-}
+})

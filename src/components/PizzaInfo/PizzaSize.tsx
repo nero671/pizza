@@ -11,8 +11,6 @@ type PizzaSizeProps = {
 
 export const PizzaSize: React.FC<PizzaSizeProps> = (props) => {
 
-    console.log(props)
-
     const [activeSize, setActiveSize] = useState<number>(0);
 
     const dispatch = useDispatch();

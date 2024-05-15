@@ -7,6 +7,7 @@ type PizzaTypeProps = {
         types: number[];
     };
 }
+
 export const PizzaType:React.FC<PizzaTypeProps> = (props) => {
     const [activeType, setActiveType] = useState<number>(0);
 

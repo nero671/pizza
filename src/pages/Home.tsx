@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 
 import '../scss/app.scss';
 import '../App.css';
@@ -31,9 +31,9 @@ export const Home = () => {
 
     // const [pizzas, setPizzas] = useState<Array<PizzasType>>([]);
 
-    const onClickCategory = (index: number) => {
+    const onClickCategory = useCallback( (index: number) => {
         dispatch(setCategoryId(index))
-    }
+    }, []);
 
     const onChangePage = (num: number) => {
         dispatch(setPageCount(num))

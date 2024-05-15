@@ -9,6 +9,7 @@ export const store = configureStore({
         cart,
         pizza
     },
+    devTools: process.env.NODE_ENV !== 'production',
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
