@@ -12,11 +12,11 @@ export const NotFoundBlock: React.FC = () => {
                 <p className={styles.description}>
                     К сожалению, данная страница отсутствует в нашем интернет-магазине
                 </p>
-                <p className={styles.description}>
-                    <Link to={'/'}>
-                        <span>Перейти на главную</span>
-                    </Link>
-                </p>
+                {/*<p className={styles.description}>*/}
+                {/*    <Link to={'/pizza/'}>*/}
+                {/*        Перейти на главную !*/}
+                {/*    </Link>*/}
+                {/*</p>*/}
             </div>
         )
 
